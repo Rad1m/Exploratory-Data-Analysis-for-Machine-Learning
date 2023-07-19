@@ -46,7 +46,7 @@ SELECT Artist, Release_Year, COUNT(*) AS num_songs, AVG(PlayCount) AS avg_plays
 observations_generator = pds.read_sql(query,
                             con,
                             coerce_float=True, # Doesn't efefct this dataset, because floats were correctly parsed
-                            parse_dates=['Release_Year'], # Parse `Release_Year` as a date
+                            parse_dates={"Release_Year": {"format": "%y"}},# Parse `Release_Year` as a date
                             chunksize=5 # Allows for streaming results as a series of shorter tables
                            )
 
